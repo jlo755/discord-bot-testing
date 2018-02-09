@@ -1,5 +1,7 @@
 package com.discord.maven.discordbot;
 
+import com.discord.trivia.util.State;
+
 import net.dv8tion.jda.core.entities.Channel;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.MessageChannel;
@@ -14,10 +16,10 @@ public class ChatListener extends ListenerAdapter{
 	public void onMessageReceived(MessageReceivedEvent event)
 	{
 		if(event.isFromType(ChannelType.TEXT)){
-			if(event.getMessage().getContentDisplay().equals("!trivia") && !DiscordBot.getInstance().getTriviaMode()){
+			if(event.getMessage().getContentDisplay().equals("!trivia") && DiscordBot.getInstance().getState().equals(State.NORMAL_STATE)){
 				MessageChannel chan = event.getChannel();
 				DiscordBot.getInstance().sendMessage(chan.getId(), "Trivia mode activated, enter !categories to choose a category.");
-				DiscordBot.getInstance().setTriviaMode(true);
+				DiscordBot.getInstance().setState(State.TRIVIA_MODE);
 				DiscordBot.getInstance().registerMessageListener(new TriviaListener());
 			}
 			

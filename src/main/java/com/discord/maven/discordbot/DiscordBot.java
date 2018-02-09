@@ -2,6 +2,8 @@ package com.discord.maven.discordbot;
 
 import javax.security.auth.login.LoginException;
 
+import com.discord.trivia.util.State;
+
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -16,12 +18,14 @@ public class DiscordBot {
 	private JDA jda;
 	private String token;
 	private boolean triviaMode;
+	public State state;
 	
 	public DiscordBot(String token) throws LoginException, InterruptedException{
 		if(instance == null){
 			instance = this;
 			setToken(token);
 			startJDA();
+			state = State.NORMAL_STATE;
 		}
 	}
 	
@@ -35,12 +39,12 @@ public class DiscordBot {
 		this.token = token;
 	}
 	
-	public boolean getTriviaMode(){
-		return this.triviaMode;
+	public State getState(){
+		return this.state;
 	}
 	
-	public void setTriviaMode(boolean triviaMode){
-		this.triviaMode = triviaMode;
+	public void setState(State s){
+		this.state = s;
 	}
 	
 	public static DiscordBot getInstance(){
