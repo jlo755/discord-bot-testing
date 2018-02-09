@@ -15,6 +15,7 @@ public class DiscordBot {
 	private static DiscordBot instance;
 	private JDA jda;
 	private String token;
+	private boolean triviaMode;
 	
 	public DiscordBot(String token) throws LoginException, InterruptedException{
 		if(instance == null){
@@ -34,6 +35,14 @@ public class DiscordBot {
 		this.token = token;
 	}
 	
+	public boolean getTriviaMode(){
+		return this.triviaMode;
+	}
+	
+	public void setTriviaMode(boolean triviaMode){
+		this.triviaMode = triviaMode;
+	}
+	
 	public static DiscordBot getInstance(){
 		return instance;
 	}
@@ -47,5 +56,9 @@ public class DiscordBot {
 	
 	public void registerMessageListener(ListenerAdapter la){
 		jda.addEventListener(la);
+	}
+	
+	public void unregisterMessageListener(ListenerAdapter la){
+		jda.removeEventListener(la);
 	}
 }

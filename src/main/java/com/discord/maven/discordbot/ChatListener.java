@@ -9,14 +9,16 @@ import net.dv8tion.jda.core.hooks.EventListener;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class ChatListener extends ListenerAdapter{
-
+	
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event)
 	{
 		if(event.isFromType(ChannelType.TEXT)){
-			if(event.getMessage().getContentDisplay().equals("!trivia")){
+			if(event.getMessage().getContentDisplay().equals("!trivia") && !DiscordBot.getInstance().getTriviaMode()){
 				MessageChannel chan = event.getChannel();
-				DiscordBot.getInstance().sendMessage(chan.getId(), "Trivia Begins!");
+				DiscordBot.getInstance().sendMessage(chan.getId(), "Trivia mode activated, enter !categories to choose a category.");
+				DiscordBot.getInstance().setTriviaMode(true);
+				DiscordBot.getInstance().registerMessageListener(new TriviaListener());
 			}
 			
 		}
