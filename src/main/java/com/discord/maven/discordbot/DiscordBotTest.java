@@ -13,14 +13,9 @@ import net.dv8tion.jda.core.requests.restaction.MessageAction;
 public class DiscordBotTest {
 	public static void main(String[] args) throws LoginException, InterruptedException{
 		String token = args[0];
-		JDA jda = new JDABuilder(AccountType.BOT)
-				.setToken(token)
-				.buildBlocking();
+		DiscordBot db = new DiscordBot(token);
 		
-		TextChannel test = jda.getTextChannelById("398331379332546563");
-		Message m = new MessageBuilder().append("Hello world!").build();
-		MessageAction ma = test.sendMessage(m);
-		ma.queue();
+		db.registerMessageListener(new ChatListener());
 		
 	}
 }
