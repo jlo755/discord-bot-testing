@@ -1,2 +1,3 @@
 # discord-bot-testing
-Testing some ideas out for what I could potentially do with the bot
+So far, it's a trivia bot.
+Trivia questions are taken from qrisuity!
